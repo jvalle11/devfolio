@@ -1,0 +1,13 @@
+_site/
+_preview/
+.jekyll-cache/
+.sass-cache/
+vendor/
+.bundle/
+*.gem
+.DS_Store
+Thumbs.db
+assets/media/**/originals/
+assets/media/models/
+assets/media/MEDIA_SOURCES.md
+design-qa.md

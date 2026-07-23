@@ -1,0 +1,226 @@
+featured:
+  - id: "ai-delivery"
+    order: 1
+    eyebrow: "Professional work"
+    title: "From requirements to rollout"
+    short_title: "AI delivery"
+    summary: >-
+      I help move implementation work from an unclear operational problem to a
+      tested release, keeping requirements, owners, blockers, and evidence clear
+      along the way.
+    context: >-
+      Implementation work where teams needed a clearer path from an operational
+      problem to a dependable release.
+    role: >-
+      I translated stakeholder needs, product feedback, and support issues into
+      requirements, implementation plans, QA checks, and launch decisions.
+    system: >-
+      A working source of truth for requirements, owners, acceptance checks,
+      dependencies, readiness evidence, support paths, and handoff material.
+    outcome: >-
+      Teams could see what was confirmed, what remained open, who owned the next
+      step, and what evidence was still needed before launch.
+    highlights:
+      - "Requirements trackers with owners, dependencies, open questions, and acceptance checks."
+      - "Onboarding and launch-readiness guides covering access, roles, support routes, and escalation."
+      - "Release notes, usage summaries, meeting follow-ups, and knowledge-transfer handoffs."
+      - "Live product, repository, and project-board checks before reporting readiness."
+      - "Feedback and issue loops that route findings back into implementation."
+    technologies: []
+    status_label: "Role and work artifacts verified. A public case study is still being prepared."
+    media_key: null
+    source_links: []
+    evidence_status: "role-and-work-artifact-backed"
+    public_artifact_status: "A sanitized, public-safe case-study visual is still needed."
+    media: null
+    visual_type: "abstract-system-map"
+    visual_label: "Process explainer, not a product screenshot"
+    motion_direction: >-
+      Trace verified handoffs from discovery through readiness and rollout; never
+      display invented product screens, client data, or fabricated metrics.
+
+  - id: "workflow-automation"
+    order: 2
+    eyebrow: "Automation & business systems"
+    title: "Web and workflow automation for small businesses"
+    short_title: "Workflow automation"
+    summary: >-
+      Through Business Solutions Agency, I build websites and connected
+      workflows for small businesses, joining the customer-facing experience
+      to the operational steps behind it.
+    context: >-
+      Lean client projects where the public website and the work behind it
+      needed to function as one maintainable system.
+    role: >-
+      Co-founder and lead developer. I handle discovery, scoping,
+      implementation, testing, launch, and iteration with business owners.
+    system: >-
+      Websites and intake paths connected to the CMS, CRM, API, webhook,
+      reporting, or support tools the workflow actually needs.
+    outcome: >-
+      Built maintainable paths between public touchpoints and the operational
+      tools behind them.
+    highlights:
+      - "Public sites and landing pages connected to intake, CRM, scheduling, email, payment, or support tools."
+      - "Automations for lead capture, outreach, order processing, reporting, data movement, and internal handoffs."
+      - "API, webhook, and native-integration paths selected for maintainability rather than novelty."
+      - "Validation, failure paths, notifications, ownership, and recovery checked before launch."
+      - "Plain-language workflow documentation, launch support, and post-launch iteration."
+    technologies:
+      - "APIs"
+      - "Webhooks"
+      - "CMS/CRM workflows"
+      - "JavaScript"
+      - "Python"
+    status_label: "Experience verified. A public client case study is still being prepared."
+    media_key: "automations"
+    source_links: []
+    evidence_status: "experience-backed; primary public case-study artifact pending"
+    media: "/imgs/automations.gif"
+    media_alt: "Existing workflow automation illustration"
+    media_role: "Atmospheric support only; not evidence of a specific integration or result."
+    motion_direction: >-
+      Animate only connections represented by a real workflow. Keep the current
+      GIF secondary until its provenance and project mapping are confirmed.
+
+  - id: "vehicle-telemetry"
+    order: 3
+    eyebrow: "IoT & data visualization"
+    title: "Vehicle telemetry over CAN bus"
+    short_title: "Vehicle telemetry"
+    summary: >-
+      For my Spring 2023 Arcadia capstone, I built the firmware and end-to-end
+      vehicle-data path shown here, from OBD-II PID requests to the Grafana dashboard.
+    context: >-
+      Arcadia University capstone investigating a web-based path for collecting
+      and analyzing vehicle electrical-system data.
+    role: >-
+      I developed the Particle C++ firmware, handled OBD-II request and response
+      processing, connected the cloud data path, and built the dashboard presentation.
+    system: >-
+      2016 Lexus / Vehicle HS CAN → OBD-II and Carloop → local Wi-Fi → Particle
+      Cloud integration → InfluxDB on a cloud VM → Grafana.
+    outcome: >-
+      Collected OBD-II readings such as RPM, vehicle speed, engine load,
+      fuel-level input, and coolant temperature. Recovered artifacts visibly
+      show RPM, speed, and engine load in Grafana during a recorded drive, while
+      source and console materials document the additional readings.
+    highlights:
+      - "Requested standard OBD-II PIDs and processed ECU responses in C++."
+      - "Sent readings through Carloop and Particle Cloud into InfluxDB."
+      - "Visualized RPM, vehicle speed, and engine load in the recovered Grafana dashboard during a recorded driving session."
+      - "Built and tested the full path across in-vehicle hardware, cloud services, storage, and visualization."
+      - "Preserved the original setup, console output, architecture, dashboard, and recorded-drive evidence shown here."
+    technologies:
+      - "C++"
+      - "OBD-II / CAN bus"
+      - "Carloop"
+      - "Particle Cloud"
+      - "InfluxDB"
+      - "Grafana"
+    status_label: "Verified capstone using recorded data, not live telemetry."
+    media_key: "live-dashboard"
+    source_links: []
+    evidence_status: "writeup-presentation-firmware-and-recorded-media-backed"
+    media: "/imgs/liveDashboard.gif"
+    media_alt: "Recorded nighttime drive alongside Grafana vehicle telemetry dashboards"
+    media_label: "Recorded capstone session, not live data"
+    planned_media:
+      - id: "vehicle-dashboard"
+        label: "Grafana dashboard capture"
+        status: "Staged in the isolated portfolio preview."
+      - id: "vehicle-system-schematic"
+        label: "System architecture schematic"
+        status: "Staged in the isolated portfolio preview."
+      - id: "vehicle-console-results"
+        label: "Console output"
+        status: "Staged in the isolated portfolio preview."
+    motion_direction: >-
+      Crossfade real setup, architecture, console, dashboard, and recorded-drive
+      artifacts. Do not add unrelated 3D assets or imply live telemetry.
+    claim_guardrails:
+      - "Do not claim remote vehicle control."
+      - "Do not claim engine performance tuning."
+      - "Do not claim completed remote commands or custom gauges without new evidence."
+
+  - id: "computer-vision"
+    order: 4
+    eyebrow: "Computer vision & ML"
+    title: "Computer vision studies"
+    short_title: "Computer vision"
+    summary: >-
+      Two Python studies focused on face similarity and image-to-text extraction,
+      including preprocessing, model integration, validation, and failure handling.
+    context: >-
+      Personal studies focused on how computer-vision pipelines handle real
+      inputs, failed detections, and noisy images.
+    role: >-
+      Input handling, preprocessing, model integration, validation, and result
+      presentation across two study paths.
+    system: >-
+      Python, OpenCV, NumPy, DeepFace / FaceNet, scikit-learn, Pillow, and
+      Tesseract OCR.
+    outcome: >-
+      The source covers two complete processing paths: ranking face similarity
+      from webcam frames and extracting contact details from scanned-card images.
+    highlights:
+      - "Worked with image files and webcam frames through Python and OpenCV."
+      - "Generated FaceNet embeddings and compared them with cosine similarity."
+      - "Handled missing faces, invalid inputs, and other failure paths instead of assuming a clean result."
+      - "Used OpenCV preprocessing and Tesseract OCR in a separate image-to-text workflow."
+      - "Documented failure cases separately from successful outputs so the behavior could be reviewed."
+    technologies:
+      - "Python"
+      - "OpenCV"
+      - "NumPy"
+      - "DeepFace / FaceNet"
+      - "Tesseract OCR"
+      - "Data validation"
+      - "Model testing"
+    status_label: "Code-backed study; a public live demo and accuracy benchmark are not published."
+    media_key: "opencv"
+    source_links: []
+    evidence_status: "source-backed; public-runtime-and-benchmark-pending"
+    media: "/imgs/openCV.gif"
+    media_alt: "Existing computer-vision experiment recording"
+    media_role: "Provisional media; do not label it as face recognition."
+    motion_direction: >-
+      Draw overlays over a verified recording only after its source project is
+      mapped. Reduced-motion mode must show a clear static frame.
+
+archive:
+  - id: "fivem-scripting-experiments"
+    title: "FiveM custom server scripting"
+    summary: >-
+      Built and tested Lua scripts in a FiveM server environment, moving between
+      client-side code and live gameplay to customize spawn behavior, work with
+      server resources, and validate changes in-game.
+    technologies:
+      - "Lua"
+      - "FiveM"
+      - "Resource configuration"
+      - "In-game testing"
+    evidence_level: "Development recording and local server artifacts"
+    evidence_status: "media-and-local-environment-backed"
+    media: "/imgs/fivem.gif"
+    media_alt: "Code editor and FiveM gameplay development recording"
+    media_label: "Lua client scripting and an in-game FiveM test session"
+    claim_guardrail: >-
+      Do not claim QBCore, ESX, anti-cheat systems, API integrations,
+      optimization results, or community scale until source evidence is found.
+
+  - id: "automotive-perception-recording"
+    public: false
+    title: "Automotive perception recording"
+    summary: >-
+      An archived computer-vision recording showing roadway perception overlays.
+      It is withheld from the featured case studies until its source and
+      ownership are mapped.
+    technologies:
+      - "Computer vision"
+      - "Machine learning"
+    evidence_level: "Existing media only; provenance pending"
+    evidence_status: "existing-media-only; provenance-pending"
+    media: "/imgs/machineLearning.gif"
+    media_alt: "Roadway computer-vision overlays in an existing recording"
+    claim_guardrail: "Do not describe the model, training process, accuracy, or ownership without source evidence."

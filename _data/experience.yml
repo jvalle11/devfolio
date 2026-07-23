@@ -1,0 +1,230 @@
+selected:
+  - id: "ajaia-technical-project-manager"
+    company: "AJAIA"
+    title: "Technical Project Manager, AI Implementation & Delivery"
+    start: "2026-04"
+    end: "2026-07-24"
+    display_period: "Apr 2026–Present"
+    display_period_after_last_day: "Apr 2026–Jul 2026"
+    current_through: "2026-07-24"
+    is_current: true
+    static_display_guidance: >-
+      Keep “Present” through July 24, 2026. After the final workday, change the
+      static display to “Apr 2026–Jul 2026” and set is_current to false; do not
+      leave the role as current until another position is found.
+    summary: >-
+      Supported AI implementation, product rollout, and workflow automation
+      across client-facing and internal projects.
+    workstreams:
+      - "Discovery, requirements, and workflow mapping"
+      - "QA, deployment planning, and launch readiness"
+      - "Onboarding, access, and support workflows"
+      - "Implementation documentation and rollout playbooks"
+      - "Stakeholder communication and blocker resolution"
+    highlights:
+      - >-
+        Worked across stakeholders, product, operations, and engineering to
+        translate workflows, feedback, support issues, and implementation
+        ambiguity into requirements, rollout plans, QA checks, and source-backed
+        project updates.
+      - >-
+        Coordinated implementation work across discovery, requirements,
+        workflow mapping, solution design, testing, deployment planning, launch
+        readiness, and post-deployment support.
+      - >-
+        Supported onboarding, access provisioning, SSO planning, pilot
+        coordination, usage visibility, monitoring, support paths, and rollout
+        readiness.
+      - >-
+        Built onboarding guides, implementation documentation, technical
+        follow-ups, project trackers, meeting archives, knowledge-base content,
+        and scalable rollout playbooks.
+      - >-
+        Partnered with clients, executives, operators, product managers, and
+        engineers to prioritize work, resolve blockers, and improve deployment
+        quality.
+    verification_status: "profile-and-work-artifact-backed"
+
+  - id: "business-solutions-agency-cofounder"
+    company: "Business Solutions Agency"
+    title: "Co-Founder / Lead Developer"
+    start: "2024-10"
+    end: null
+    display_period: "Oct 2024–Present"
+    is_current: true
+    summary: >-
+      Co-founded and led development for a digital solutions agency delivering
+      websites, custom software, workflow automation, and operational systems
+      for small-business clients.
+    workstreams:
+      - "Websites, portals, and e-commerce"
+      - "CRM and CMS integrations"
+      - "APIs, webhooks, and intake flows"
+      - "Reporting, migration, and follow-up workflows"
+      - "Testing, launch, and iteration"
+    highlights:
+      - >-
+        Partnered directly with business owners to analyze workflows, uncover
+        operational friction, and design maintainable technical solutions.
+      - >-
+        Built full-stack systems across WordPress, GHL, PHP, JavaScript, Python,
+        AWS, Cloudways, databases, and third-party integrations.
+      - >-
+        Connected websites, CRM and CMS platforms, intake flows, reporting,
+        payments, APIs, webhooks, and AI-enabled support experiences.
+      - >-
+        Built automations connecting CRM systems, invoicing, order management,
+        customer support, and external services.
+      - >-
+        Managed engagements from discovery and requirements through
+        implementation, testing, deployment, client training, launch support,
+        and post-launch improvements.
+    verification_status: "live-profile-backed"
+
+  - id: "deepshot-ml-development-contributor"
+    company: "DeepShot AI"
+    title: "ML Development Contributor"
+    start: "2024-08"
+    end: "2026-05"
+    display_period: "Aug 2024–May 2026"
+    is_current: false
+    summary: >-
+      Supported machine-learning development through model-training workflows,
+      edge-case testing, dataset validation, preprocessing improvements, and AI
+      feature evaluation.
+    workstreams:
+      - "Training and testing data review"
+      - "Preprocessing and input/output checks"
+      - "Edge-case testing"
+      - "Feature and model-behavior review"
+    highlights:
+      - >-
+        Prepared and validated training and testing data, reviewed model
+        outputs, and identified edge cases that affected feature reliability.
+      - >-
+        Supported data preprocessing, extraction, and input/output improvements
+        across model-evaluation workflows.
+      - >-
+        Partnered with engineering to validate feature behavior, improve dataset
+        quality, and troubleshoot model issues.
+      - >-
+        Contributed QA findings that supported continuous refinement throughout
+        the development lifecycle.
+    verification_status: "live-profile-date-confirmed"
+
+  - id: "tapestry-data-analyst-specialist"
+    company: "Tapestry"
+    title: "Data Analyst Specialist"
+    start: "2024-03"
+    end: "2024-08"
+    display_period: "Mar 2024–Aug 2024"
+    is_current: false
+    summary: >-
+      Supported data management, reporting, and operational documentation by
+      maintaining structured records, correspondence, and business data used
+      across internal workflows.
+    workstreams:
+      - "Operational reporting"
+      - "Data cleaning and validation"
+      - "Structured records and correspondence"
+      - "Excel, SQL, and Python/Pandas"
+    highlights:
+      - >-
+        Performed data validation, cleansing, quality assurance, and record
+        maintenance to improve reporting accuracy and database integrity.
+      - >-
+        Compiled and processed information for reporting while identifying
+        inconsistencies and keeping business records current.
+      - >-
+        Helped improve data-management workflows and documentation practices as
+        operational requirements grew.
+    verification_status: "live-profile-backed"
+
+foundations:
+  - id: "hasbro-3d-modeling-intern"
+    company: "Hasbro"
+    title: "3D Modeling Intern"
+    start: "2021-12"
+    end: "2022-05"
+    display_period: "Dec 2021–May 2022"
+    summary: >-
+      Supported modular 3D modeling in a production-style student program using
+      Blender and CAD workflows.
+    workstreams:
+      - "Modular 3D modeling"
+      - "Blender and CAD workflows"
+      - "Blueprint and infrastructure corrections"
+      - "Design feedback and iteration"
+    highlights:
+      - >-
+        Broke complex mold structures into smaller modular model components.
+      - >-
+        Corrected blueprint and infrastructure details as the models evolved.
+      - >-
+        Worked through visual accuracy, technical constraints, and design
+        feedback in an iterative production-style environment.
+    verification_status: "profile-backed"
+    wording_guardrail: >-
+      Keep the second modeling tool generic; the exact CAD application has not
+      been confirmed.
+
+  - id: "arcadia-it-helpdesk-work-study"
+    company: "Arcadia University"
+    title: "Community-Based Work-Study"
+    start: "2019-08"
+    end: "2023-05"
+    display_period: "Aug 2019–May 2023"
+    summary: >-
+      Supported campus and community-based work-study responsibilities while
+      completing a computer science degree.
+    workstreams:
+      - "Campus and community support"
+      - "Task ownership and follow-through"
+      - "Communication across academic environments"
+      - "Organized work across multiple stakeholders"
+    highlights:
+      - >-
+        Built early professional experience in reliability, communication, and
+        task ownership across academic and community environments.
+      - >-
+        Balanced work-study responsibilities with a computer science program
+        over four academic years.
+      - >-
+        Developed the follow-through, clear communication, and organization that
+        now carry into technical projects.
+    verification_status: "live-profile-backed"
+
+full_history:
+  - id: "pier-115-inventory-specialist"
+    company: "Pier 115 Bar and Grill"
+    title: "Inventory Specialist"
+    start: "2020-07"
+    end: "2020-11"
+    display_period: "Jul 2020–Nov 2020"
+    summary: >-
+      Managed inventory and operational tracking, built a custom inventory tool,
+      and supported social media advertising and online visibility.
+    verification_status: "live-profile-backed"
+
+  - id: "genesis-atm-technical-operations"
+    company: "Genesis ATM"
+    title: "Negotiator & Programmer"
+    start: "2016-07"
+    end: "2019-03"
+    display_period: "Jul 2016–Mar 2019"
+    summary: >-
+      Supported ATM-related technical operations and transaction workflows,
+      built an automated fund-tracking program, and assisted with product sales
+      and issue resolution.
+    verification_status: "live-profile-backed"
+
+  - id: "yankee-pizzeria-social-media"
+    company: "Yankee Pizzeria Inc."
+    title: "Social Media Ambassador"
+    start: "2015-05"
+    end: "2016-02"
+    display_period: "May 2015–Feb 2016"
+    summary: >-
+      Supported online ordering, basic order-management tooling, social media
+      advertising, and customer-facing digital activity.
+    verification_status: "live-profile-backed"

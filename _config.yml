@@ -1,4 +1,18 @@
-title: Josh Valle Devfolio
-description: Developer Portfolio
+title: Joshua Valle | Developer Portfolio
+description: Joshua Valle's developer portfolio, covering AI implementation, workflow automation, data projects, and full-stack systems.
 baseurl: "/devfolio"
 url: "https://jvalle11.github.io"
+
+sass:
+  style: compressed
+
+exclude:
+  - design-qa.md
+  - imgs
+  - assets/media/archive/originals
+  - assets/media/automation/originals
+  - assets/media/carloop/originals
+  - assets/media/MEDIA_SOURCES.md
+  - assets/media/models
+  - assets/media/models/originals
+  - assets/media/models/toy-car.glb

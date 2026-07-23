@@ -1,0 +1,38 @@
+{% assign profile = site.data.profile %}
+<section class="contact section-band" id="contact" aria-labelledby="contact-title">
+  <div class="shell contact__grid">
+    <div data-reveal>
+      <p class="section-index">Contact</p>
+      <h2 id="contact-title">Get in touch.</h2>
+      <p>Email me about a role or project.</p>
+      <div class="contact-links">
+        <a href="mailto:{{ profile.email }}"><span>Email</span>{{ profile.email }}</a>
+        <a href="{{ profile.github_url }}" target="_blank" rel="noreferrer"><span>GitHub</span>jvalle11</a>
+        <a href="{{ profile.linkedin_url }}" target="_blank" rel="noreferrer"><span>LinkedIn</span>josh-valle-l337</a>
+      </div>
+    </div>
+
+    <form class="contact-form"{% if site.preview_mode %} action="#contact" method="get" data-preview-form{% else %} action="https://formspree.io/f/movdzpdd" method="post"{% endif %} data-contact-form data-reveal>
+      <div class="field">
+        <label for="contact-name">Name</label>
+        <input id="contact-name" name="name" type="text" autocomplete="name" required>
+      </div>
+      <div class="field">
+        <label for="contact-email">Email</label>
+        <input id="contact-email" name="email" type="email" autocomplete="email" required>
+      </div>
+      <div class="field field--full">
+        <label for="contact-message">Message</label>
+        <textarea id="contact-message" name="message" rows="5" required></textarea>
+      </div>
+      <input type="hidden" name="_subject" value="Portfolio inquiry for Joshua Valle">
+      <button class="button button--primary" type="submit">Send message</button>
+      {% if site.preview_mode %}
+        <p class="form-note">Preview mode checks validation without sending a message.</p>
+      {% else %}
+        <p class="form-note">Submissions use Formspree.</p>
+      {% endif %}
+      <p class="form-status" data-form-status role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</section>

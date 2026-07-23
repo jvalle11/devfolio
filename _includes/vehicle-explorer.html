@@ -1,0 +1,101 @@
+{% assign project = include.project %}
+<div class="evidence-reel" data-vehicle data-evidence-reel data-reveal>
+  <div class="evidence-reel__surface" data-evidence-surface>
+    <figure class="evidence-reel__panel evidence-reel__panel--active" id="carloop-panel-setup" role="tabpanel" aria-labelledby="carloop-tab-setup" aria-hidden="false" data-evidence-panel="0">
+      <div class="evidence-reel__diptych">
+        <img src="{{ '/assets/media/carloop/vehicle-laptop.webp' | relative_url }}" alt="Lexus capstone setup with a laptop, cabling, and OBD hardware" loading="lazy" decoding="async">
+        <span class="evidence-reel__hardware-crop"><img class="evidence-reel__hardware-shot" src="{{ '/assets/media/carloop/obd-hardware.webp' | relative_url }}" alt="Carloop and OBD hardware connected inside the vehicle" loading="lazy" decoding="async"></span>
+      </div>
+      <figcaption class="sr-only">The real laptop, cabling, and OBD hardware used for the capstone.</figcaption>
+    </figure>
+
+    <figure class="evidence-reel__panel evidence-reel__panel--architecture" id="carloop-panel-architecture" role="tabpanel" aria-labelledby="carloop-tab-architecture" aria-hidden="true" hidden data-evidence-panel="1">
+      <div class="carloop-architecture" aria-label="Vehicle telemetry architecture from the Lexus CAN network to Grafana">
+        <a class="carloop-architecture__source" href="{{ '/assets/media/carloop/schematic.webp' | relative_url }}" target="_blank" rel="noreferrer">
+          <img src="{{ '/assets/media/carloop/schematic.webp' | relative_url }}" alt="Original capstone architecture schematic" loading="lazy" decoding="async">
+          <span><strong>Original system diagram</strong><small>Open full size</small></span>
+        </a>
+        <ol class="carloop-architecture__nodes">
+          <li><span>01</span><strong>2016 Lexus</strong><small>Vehicle HS CAN</small></li>
+          <li><span>02</span><strong>OBD-II + Carloop</strong><small>Particle-board C++ firmware</small></li>
+          <li><span>03</span><strong>Local network</strong><small>Wi-Fi / HUM hotspot</small></li>
+          <li><span>04</span><strong>Particle Cloud</strong><small>Private events + integration</small></li>
+          <li><span>05</span><strong>InfluxDB</strong><small>Cloud virtual machine</small></li>
+          <li><span>06</span><strong>Grafana</strong><small>Recorded dashboard</small></li>
+        </ol>
+        <div class="carloop-architecture__notes">
+          <p>CAN request and ECU response at the vehicle edge</p>
+          <p>Saved firmware publishes readings on a two-second interval</p>
+        </div>
+      </div>
+      <figcaption class="sr-only">The original capstone diagram beside a readable six-stage system path.</figcaption>
+    </figure>
+
+    <figure class="evidence-reel__panel evidence-reel__panel--readings" id="carloop-panel-readings" role="tabpanel" aria-labelledby="carloop-tab-readings" aria-hidden="true" hidden data-evidence-panel="2">
+      <div class="carloop-readings">
+        <div class="carloop-readings__capture"><img src="{{ '/assets/media/carloop/console-results.webp' | relative_url }}" alt="Captured console output from the recorded vehicle-data run" loading="lazy" decoding="async"></div>
+        <div class="carloop-readings__sample">
+          <div><span>Saved console output</span><strong>Recorded readings</strong></div>
+          <ul aria-label="Values transcribed from the recorded console sample">
+            <li><span>Engine load</span><strong>26.67<small>%</small></strong></li>
+            <li><span>Engine speed</span><strong>697.50<small>rpm</small></strong></li>
+            <li><span>Run time</span><strong>6,759<small>s</small></strong></li>
+            <li><span>Vehicle speed</span><strong>0.00<small>mph</small></strong></li>
+            <li><span>Throttle</span><strong>15.29<small>%</small></strong></li>
+            <li><span>Absolute load</span><strong>12.16<small>%</small></strong></li>
+            <li><span>Intake air</span><strong>66.00<small>°C</small></strong></li>
+          </ul>
+          <p class="carloop-readings__dashboard"><span>Dashboard snapshot</span><strong>3.7 mph · 705 rpm · 32.5% load</strong></p>
+        </div>
+      </div>
+      <figcaption class="sr-only">Saved console and dashboard readings from the original capstone run.</figcaption>
+    </figure>
+
+    <figure class="evidence-reel__panel evidence-reel__panel--contain evidence-reel__panel--dashboard" id="carloop-panel-dashboard" role="tabpanel" aria-labelledby="carloop-tab-dashboard" aria-hidden="true" hidden data-evidence-panel="3">
+      <img src="{{ '/assets/media/carloop/dashboard.webp' | relative_url }}" alt="Recovered Grafana dashboard showing speed, RPM, engine load, and time-series data" loading="lazy" decoding="async">
+      <figcaption class="sr-only">The recovered Grafana dashboard from the recorded capstone session.</figcaption>
+    </figure>
+
+    <figure class="evidence-reel__panel evidence-reel__panel--video" id="carloop-panel-drive" role="tabpanel" aria-labelledby="carloop-tab-drive" aria-hidden="true" hidden data-evidence-panel="4">
+      <video controls muted loop playsinline preload="metadata" poster="{{ '/assets/media/carloop/telemetry-drive-poster.webp' | relative_url }}" aria-label="Recorded night drive with the Grafana vehicle-telemetry session overlaid" data-evidence-video>
+        <source src="{{ '/assets/media/carloop/telemetry-drive.webm' | relative_url }}" type="video/webm">
+        <source src="{{ '/assets/media/carloop/telemetry-drive.mp4' | relative_url }}" type="video/mp4">
+      </video>
+      <figcaption class="sr-only">A silent recording of the driving session with the Grafana view overlaid. This is recorded evidence, not live telemetry.</figcaption>
+    </figure>
+
+    <div class="evidence-reel__scrim" aria-hidden="true"></div>
+    <div class="evidence-reel__caption" aria-live="polite" aria-atomic="true">
+      <span data-evidence-count>01 / 05</span>
+      <div>
+        <strong data-evidence-title>Actual setup</strong>
+        <p data-evidence-copy>The real laptop, cabling, and OBD hardware used inside the Lexus</p>
+      </div>
+    </div>
+    <div class="evidence-reel__progress" role="progressbar" aria-label="Carloop evidence position" aria-valuemin="1" aria-valuemax="5" aria-valuenow="1" data-evidence-progress>
+      <span aria-hidden="true"></span>
+    </div>
+  </div>
+  <div class="evidence-reel__controls">
+    <div class="evidence-reel__tabs" role="tablist" aria-label="Carloop project evidence" data-evidence-tabs>
+      <button type="button" class="evidence-reel__tab is-active is-pinned" id="carloop-tab-setup" role="tab" aria-controls="carloop-panel-setup" aria-selected="true" tabindex="0" data-evidence-index="0" data-evidence-title="Actual setup" data-evidence-copy="The real cabling and OBD hardware used inside the Lexus">
+        <span>01</span><strong>Setup</strong>
+      </button>
+      <button type="button" class="evidence-reel__tab" id="carloop-tab-architecture" role="tab" aria-controls="carloop-panel-architecture" aria-selected="false" tabindex="-1" data-evidence-index="1" data-evidence-title="System path" data-evidence-copy="The original diagram alongside a readable six-stage path from the Lexus CAN network to Grafana">
+        <span>02</span><strong>Architecture</strong>
+      </button>
+      <button type="button" class="evidence-reel__tab" id="carloop-tab-readings" role="tab" aria-controls="carloop-panel-readings" aria-selected="false" tabindex="-1" data-evidence-index="2" data-evidence-title="Recorded readings" data-evidence-copy="Values transcribed from the saved console output and dashboard capture">
+        <span>03</span><strong>Readings</strong>
+      </button>
+      <button type="button" class="evidence-reel__tab" id="carloop-tab-dashboard" role="tab" aria-controls="carloop-panel-dashboard" aria-selected="false" tabindex="-1" data-evidence-index="3" data-evidence-title="Grafana view" data-evidence-copy="The recovered dashboard shows speed, RPM, engine load, and time-series data">
+        <span>04</span><strong>Dashboard</strong>
+      </button>
+      <button type="button" class="evidence-reel__tab" id="carloop-tab-drive" role="tab" aria-controls="carloop-panel-drive" aria-selected="false" tabindex="-1" data-evidence-index="4" data-evidence-title="Recorded drive" data-evidence-copy="A silent recording of the drive with the Grafana session overlaid, not live telemetry">
+        <span>05</span><strong>Drive</strong>
+      </button>
+    </div>
+    <p class="evidence-reel__swipe-hint"><span class="evidence-reel__hint-touch">Swipe to see all views</span></p>
+  </div>
+
+  <p class="evidence-reel__source"><a href="https://scholarworks.arcadia.edu/showcase/2023/comp_sci_math/5/" target="_blank" rel="noreferrer">View the Arcadia capstone record</a></p>
+</div>

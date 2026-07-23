@@ -1,0 +1,205 @@
+{% assign experience = site.data.experience %}
+{% assign rail_roles = experience.selected | concat: experience.foundations | sort: 'start' %}
+{% assign default_role = experience.selected | first %}
+<section class="experience section-band" id="experience" aria-labelledby="experience-title">
+  <div class="shell">
+    <header class="section-heading" data-reveal>
+      <p class="section-index">2019–2026</p>
+      <div>
+        <h2 id="experience-title">Experience</h2>
+        <p>Six roles across technical support, data, development, and AI delivery.</p>
+      </div>
+    </header>
+
+    <div
+      class="experience-chronology"
+      data-experience-rail
+      data-default-role="{{ default_role.id }}"
+      data-range-start="2019-01-01"
+      data-range-end="2026-07-24"
+    >
+      <div class="experience-chronology__toolbar">
+        <p class="experience-chronology__legend">
+          <span aria-hidden="true"></span>
+          Time in role
+        </p>
+      </div>
+
+      <div class="experience-chronology__card">
+        <div
+          class="experience-chronology__track"
+          data-experience-track
+          tabindex="0"
+          aria-label="Interactive experience timeline"
+          aria-describedby="experience-timeline-instructions"
+        >
+          <div class="experience-chronology__axis" data-experience-axis>
+          <ol class="experience-chronology__years" aria-hidden="true">
+            {% for year in (2019..2026) %}
+              <li data-experience-year="{{ year }}"><span>{{ year }}</span></li>
+            {% endfor %}
+          </ol>
+
+          <div class="experience-scrubber" data-experience-scrubber aria-hidden="true">
+            <time data-experience-scrubber-label>2019</time>
+            <span></span>
+          </div>
+
+          <ol class="experience-markers" role="tablist" aria-label="Experience timeline">
+            {% for role in rail_roles %}
+              <li
+                class="experience-marker"
+                role="presentation"
+                data-experience-item
+                data-experience-role="{{ role.id }}"
+                data-start="{{ role.start }}"
+                data-end="{{ role.end }}"
+                data-current="{{ role.is_current | default: false }}"
+              >
+                <button
+                  class="experience-marker__button"
+                  id="experience-control-{{ role.id }}"
+                  type="button"
+                  role="tab"
+                  data-experience-role-control
+                  aria-controls="experience-details-{{ role.id }}"
+                  aria-label="{{ role.company }}, {{ role.title }}, {{ role.display_period }}"
+                  aria-selected="{% if role.id == default_role.id %}true{% else %}false{% endif %}"
+                  tabindex="{% if role.id == default_role.id %}0{% else %}-1{% endif %}"
+                >
+                  <span class="experience-marker__duration" aria-hidden="true"></span>
+                  <span class="experience-marker__dot" aria-hidden="true"></span>
+                  <span class="experience-marker__label">
+                    <span class="experience-marker__company">{{ role.company }}</span>
+                    <span
+                      class="experience-marker__period"
+                      {% if role.current_through %}data-current-through="{{ role.current_through }}" data-period-after="{{ role.display_period_after_last_day }}"{% endif %}
+                    >{{ role.display_period }}</span>
+                  </span>
+                  <span class="sr-only">, {{ role.title }}</span>
+                </button>
+              </li>
+            {% endfor %}
+          </ol>
+          </div>
+        </div>
+
+        <div class="experience-chronology__card-footer">
+          <p class="experience-chronology__hint" id="experience-timeline-instructions">
+            <span class="experience-chronology__hint-pointer">Drag to move · use the controls to zoom</span>
+            <span class="experience-chronology__hint-touch">Swipe to move · use the controls to zoom</span>
+          </p>
+          <div class="experience-zoom" role="group" aria-label="Timeline zoom">
+            <button class="experience-zoom__button" type="button" data-experience-zoom-out aria-label="Zoom timeline out">
+              <span aria-hidden="true">−</span>
+            </button>
+            <button class="experience-zoom__reset" type="button" data-experience-zoom-reset aria-label="Reset timeline zoom">
+              <span data-experience-zoom-label>100%</span>
+            </button>
+            <button class="experience-zoom__button" type="button" data-experience-zoom-in aria-label="Zoom timeline in">
+              <span aria-hidden="true">+</span>
+            </button>
+            <span class="sr-only" data-experience-zoom-status aria-live="polite" aria-atomic="true">Timeline zoom 100%</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="experience-detail-deck">
+        {% for role in rail_roles %}
+          <div
+            class="experience-detail"
+            id="experience-details-{{ role.id }}"
+            data-experience-details
+            data-experience-panel="{{ role.id }}"
+            role="tabpanel"
+            aria-labelledby="experience-control-{{ role.id }}"
+            {% unless role.id == default_role.id %}hidden{% endunless %}
+          >
+            <header class="experience-detail__meta">
+              <div>
+                <p class="experience-detail__company">{{ role.company }}</p>
+                <h3 class="experience-detail__title">{{ role.title }}</h3>
+              </div>
+              <p
+                class="experience-detail__period"
+                {% if role.current_through %}data-current-through="{{ role.current_through }}" data-period-after="{{ role.display_period_after_last_day }}"{% endif %}
+              >{{ role.display_period }}</p>
+            </header>
+            <div class="experience-detail__overview">
+              <p class="experience-detail__summary">{{ role.summary }}</p>
+              {% if role.workstreams %}
+                <div class="experience-detail__scope">
+                  <p>Work included</p>
+                  <ul>
+                    {% for workstream in role.workstreams %}<li>{{ workstream }}</li>{% endfor %}
+                  </ul>
+                </div>
+              {% endif %}
+            </div>
+            <div class="experience-detail__responsibilities">
+              <p class="experience-detail__label">What I did</p>
+              {% if role.highlights %}
+                <ul class="experience-detail__highlights">
+                  {% for highlight in role.highlights %}<li>{{ highlight }}</li>{% endfor %}
+                </ul>
+              {% endif %}
+            </div>
+            <button class="experience-detail__close" type="button" data-experience-close>
+              Return to timeline
+            </button>
+          </div>
+        {% endfor %}
+      </div>
+
+      <section class="experience-directory" aria-labelledby="experience-directory-title">
+        <header class="experience-directory__header">
+          <h3 id="experience-directory-title">All experience</h3>
+          <p>Roles, dates, and organizations at a glance.</p>
+        </header>
+        <ol class="experience-directory__list">
+          {% for role in rail_roles reversed %}
+            <li class="experience-directory__row" data-experience-directory-item data-experience-role="{{ role.id }}">
+              <button
+                class="experience-directory__button"
+                type="button"
+                data-experience-directory-control
+                data-experience-role="{{ role.id }}"
+                aria-controls="experience-details-{{ role.id }}"
+                aria-pressed="{% if role.id == default_role.id %}true{% else %}false{% endif %}"
+              >
+                <span class="experience-directory__company">{{ role.company }}</span>
+                <span class="experience-directory__title">{{ role.title }}</span>
+                <span
+                  class="experience-directory__period"
+                  {% if role.current_through %}data-current-through="{{ role.current_through }}" data-period-after="{{ role.display_period_after_last_day }}"{% endif %}
+                >{{ role.display_period }}</span>
+                <span class="experience-directory__arrow" aria-hidden="true">View</span>
+              </button>
+            </li>
+          {% endfor %}
+        </ol>
+      </section>
+    </div>
+
+    <div class="experience-archive">
+      <button
+        class="experience-archive__toggle text-button"
+        type="button"
+        data-experience-toggle
+        aria-controls="full-experience"
+        aria-expanded="false"
+      >
+        <span data-experience-toggle-label>Show earlier roles</span>
+      </button>
+      <div class="full-experience experience-archive__list" id="full-experience" hidden>
+        {% for role in experience.full_history %}
+          <article class="history-row">
+            <p>{{ role.display_period }}</p>
+            <div><h3>{{ role.title }}</h3><p>{{ role.company }}</p></div>
+            <p>{{ role.summary }}</p>
+          </article>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,69 @@
+{% assign profile = site.data.profile %}
+<section class="hero" id="home" aria-labelledby="hero-title" data-hero-root>
+  <canvas class="hero-field" data-hero-field aria-hidden="true"></canvas>
+  <div class="hero__inner shell">
+    <div class="hero__copy" id="about" data-reveal>
+      <p class="hero__name">{{ profile.name }}</p>
+      <h1 id="hero-title">{{ profile.headline }}</h1>
+      <p class="hero__subhead">{{ profile.subhead }}</p>
+      <div class="hero__actions">
+        <a class="button button--primary" href="#projects">Explore the work</a>
+        <a class="button button--secondary" href="mailto:{{ profile.email }}">Email me</a>
+      </div>
+    </div>
+
+    <div class="hero-projects-wrap" data-hero-projects>
+      <div class="hero-projects__heading" aria-hidden="true">
+        <span>Selected work</span>
+        <span>Hover a project to see the background respond</span>
+      </div>
+      <ol class="hero-projects" aria-label="Selected project areas">
+      <li class="hero-projects__item">
+        <a class="hero-project" href="#ai-delivery" data-hero-project data-field-x="0.73" data-field-y="0.24">
+          <span class="hero-project__index">01</span>
+          <span class="hero-project__body">
+            <span class="hero-project__label">AI implementation</span>
+            <strong>From requirements to a working release</strong>
+            <span class="hero-project__tools">Discovery · QA · rollout</span>
+          </span>
+          <span class="hero-project__action" aria-hidden="true">View</span>
+        </a>
+      </li>
+      <li class="hero-projects__item">
+        <a class="hero-project" href="#workflow-automation" data-hero-project data-field-x="0.84" data-field-y="0.43">
+          <span class="hero-project__index">02</span>
+          <span class="hero-project__body">
+            <span class="hero-project__label">Workflow automation</span>
+            <strong>Web systems and connected workflows</strong>
+            <span class="hero-project__tools">Web apps · APIs · integrations</span>
+          </span>
+          <span class="hero-project__action" aria-hidden="true">View</span>
+        </a>
+      </li>
+      <li class="hero-projects__item">
+        <a class="hero-project" href="#vehicle-telemetry" data-hero-project data-field-x="0.70" data-field-y="0.65">
+          <span class="hero-project__index">03</span>
+          <span class="hero-project__body">
+            <span class="hero-project__label">Vehicle telemetry</span>
+            <strong>Vehicle data, from CAN bus to dashboard</strong>
+            <span class="hero-project__tools">C++ · Carloop · InfluxDB · Grafana</span>
+          </span>
+          <span class="hero-project__action" aria-hidden="true">View</span>
+        </a>
+      </li>
+      <li class="hero-projects__item">
+        <a class="hero-project" href="#computer-vision" data-hero-project data-field-x="0.87" data-field-y="0.81">
+          <span class="hero-project__index">04</span>
+          <span class="hero-project__body">
+            <span class="hero-project__label">Computer vision</span>
+            <strong>Image-processing and model studies</strong>
+            <span class="hero-project__tools">Python · OpenCV · model testing</span>
+          </span>
+          <span class="hero-project__action" aria-hidden="true">View</span>
+        </a>
+      </li>
+      </ol>
+      <p class="hero-field-hint"><span aria-hidden="true"></span> Move the pointer · click empty space for a pulse</p>
+    </div>
+  </div>
+</section>

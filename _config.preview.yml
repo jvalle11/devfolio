@@ -1,0 +1,4 @@
+baseurl: ""
+url: "http://127.0.0.1:4100"
+future: true
+preview_mode: true

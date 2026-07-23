@@ -1,0 +1,237 @@
+{% assign featured = site.data.projects.featured | sort: 'order' %}
+<section class="projects section-band" id="projects" aria-labelledby="projects-title">
+  <div class="shell">
+    <header class="section-heading section-heading--plain" data-reveal>
+      <div>
+        <h2 id="projects-title">Selected work</h2>
+      </div>
+    </header>
+
+    {% for project in featured %}
+      <article class="project-chapter project-chapter--{{ project.id }}" id="{{ project.id }}" data-project="{{ project.id }}">
+        <header class="project-chapter__header" data-reveal>
+          <div>
+            <h3>{{ project.title }}</h3>
+            {% unless project.id == 'vehicle-telemetry' %}<p class="project-chapter__summary">{{ project.summary }}</p>{% endunless %}
+          </div>
+        </header>
+
+        {% case project.id %}
+          {% when 'ai-delivery' %}
+            <div class="project-surface project-surface--delivery" data-delivery data-reveal>
+              <div class="delivery-studio">
+              <div class="delivery-flow" role="tablist" aria-label="AI implementation delivery sequence">
+                {% assign stages = 'Discovery,Requirements,Implementation,Readiness,Rollout' | split: ',' %}
+                {% for stage in stages %}
+                  {% assign stage_id = stage | downcase %}
+                  <button class="delivery-stage{% if forloop.first %} is-active{% endif %}" type="button" id="delivery-tab-{{ stage_id }}" role="tab" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}" aria-controls="delivery-panel-{{ stage_id }}" tabindex="{% if forloop.first %}0{% else %}-1{% endif %}" data-delivery-tab="{{ stage_id }}">
+                    <span>0{{ forloop.index }}</span><strong>{{ stage }}</strong>
+                    {% case stage %}
+                      {% when 'Discovery' %}<small>Understand the current path</small>
+                      {% when 'Requirements' %}<small>Define behavior and proof</small>
+                      {% when 'Implementation' %}<small>Track the build and blockers</small>
+                      {% when 'Readiness' %}<small>Test the complete journey</small>
+                      {% when 'Rollout' %}<small>Launch with clear ownership</small>
+                    {% endcase %}
+                  </button>
+                {% endfor %}
+              </div>
+              <div class="delivery-panels">
+                {% for stage in stages %}
+                  {% assign stage_id = stage | downcase %}
+                  <section class="delivery-panel{% if forloop.first %} is-active{% endif %}" id="delivery-panel-{{ stage_id }}" role="tabpanel" aria-labelledby="delivery-tab-{{ stage_id }}" data-delivery-panel="{{ stage_id }}"{% unless forloop.first %} hidden{% endunless %}>
+                    <span class="delivery-panel__number">0{{ forloop.index }} / 05</span>
+                    {% case stage %}
+                      {% when 'Discovery' %}
+                        <h4>Understand the work before prescribing the software</h4>
+                        <p>I trace who is involved, which systems are already in the path, where the handoff breaks, and which constraints cannot be ignored. The goal is a problem statement narrow enough to act on.</p>
+                        <ul>
+                          <li><strong>Current path</strong><span>People, systems, source material, and handoffs as they exist today.</span></li>
+                          <li><strong>Constraints</strong><span>Access, policy, timing, ownership, and technical limits surfaced early.</span></li>
+                          <li><strong>Decision record</strong><span>Confirmed facts separated from assumptions and open questions.</span></li>
+                        </ul>
+                      {% when 'Requirements' %}
+                        <h4>Make the expected behavior testable</h4>
+                        <p>I turn the problem into explicit requirements, acceptance conditions, dependencies, and owners. That gives the build team a shared definition of done and gives stakeholders something concrete to review.</p>
+                        <ul>
+                          <li><strong>Requirements</strong><span>User paths, system behavior, edge cases, and non-negotiable constraints.</span></li>
+                          <li><strong>Acceptance checks</strong><span>Observable proof for what must work before a feature is considered ready.</span></li>
+                          <li><strong>Build slices</strong><span>Small, ordered increments with unresolved decisions kept visible.</span></li>
+                        </ul>
+                      {% when 'Implementation' %}
+                        <h4>Keep technical work tied to the original need</h4>
+                        <p>I maintain the working source of truth while implementation moves: what changed, what is blocked, which dependency matters next, and whether the latest build still matches the agreed requirement.</p>
+                        <ul>
+                          <li><strong>Implementation tracking</strong><span>Verified status, owners, dependencies, and the next executable action.</span></li>
+                          <li><strong>Blocker resolution</strong><span>Access, data, environment, product, and coordination issues surfaced early.</span></li>
+                          <li><strong>Cross-functional handoff</strong><span>Technical detail translated without losing the decision behind it.</span></li>
+                        </ul>
+                      {% when 'Readiness' %}
+                        <h4>Exercise the complete journey, not just the happy path</h4>
+                        <p>I test the visible workflow alongside access, onboarding, failure states, support readiness, and the fallback path. Gaps remain open until there is direct evidence they are resolved.</p>
+                        <ul>
+                          <li><strong>End-to-end QA</strong><span>Real click paths, inputs, outputs, state changes, and repeatable issue evidence.</span></li>
+                          <li><strong>Operational readiness</strong><span>Accounts, permissions, onboarding steps, support ownership, and escalation.</span></li>
+                          <li><strong>Go / no-go view</strong><span>Confirmed live behavior kept separate from target state and remaining risk.</span></li>
+                        </ul>
+                      {% when 'Rollout' %}
+                        <h4>Launch with a usable handoff and an honest next step</h4>
+                        <p>I prepare the release, onboarding, support, and feedback material around the product so the people taking over know what is live, how to use it, where to report a problem, and who owns what follows.</p>
+                        <ul>
+                          <li><strong>Release material</strong><span>What changed, who it affects, and the exact path people should follow.</span></li>
+                          <li><strong>Feedback loop</strong><span>Clear intake, triage, ownership, and a route back into implementation.</span></li>
+                          <li><strong>Handoff</strong><span>Open items, owners, deadlines, support paths, and next decisions.</span></li>
+                        </ul>
+                    {% endcase %}
+                  </section>
+                {% endfor %}
+              </div>
+              </div>
+            </div>
+
+          {% when 'workflow-automation' %}
+            <div class="project-surface project-surface--automation" data-reveal>
+              <div class="automation-showcase">
+                <div class="media-frame" data-media data-autoplay-visible>
+                  <video muted loop playsinline preload="metadata" poster="{{ '/assets/media/automation/automation-loop-poster.webp' | relative_url }}" aria-label="Workflow integration ecosystem montage">
+                    <source src="{{ '/assets/media/automation/automation-loop.webm' | relative_url }}" type="video/webm">
+                    <source src="{{ '/assets/media/automation/automation-loop.mp4' | relative_url }}" type="video/mp4">
+                  </video>
+                  <button class="media-control" type="button" data-media-toggle aria-label="Play workflow montage">Play</button>
+                  <p class="sr-only" aria-live="polite" data-media-status></p>
+                </div>
+                <div class="automation-path">
+                  <p class="automation-path__eyebrow">How I approach the work</p>
+                  <ol class="workflow-map" aria-label="Workflow delivery steps">
+                    <li><span>01</span><div><strong>Map the work</strong><p>Trace the existing path, the owner at each handoff, and the friction worth solving.</p></div></li>
+                    <li><span>02</span><div><strong>Choose the connection</strong><p>Use the smallest dependable mix of native tools, APIs, webhooks, and custom code.</p></div></li>
+                    <li><span>03</span><div><strong>Test the full path</strong><p>Check validation, notifications, failure states, ownership, and what happens next.</p></div></li>
+                    <li><span>04</span><div><strong>Launch and support</strong><p>Document the workflow, watch the first real use, and improve what the evidence shows.</p></div></li>
+                  </ol>
+                </div>
+              </div>
+            </div>
+
+          {% when 'vehicle-telemetry' %}
+            {% include vehicle-explorer.html project=project %}
+
+          {% when 'computer-vision' %}
+            <div class="project-surface project-surface--vision vision-showcase" data-reveal>
+              <div class="vision-showcase__lead">
+                <div class="vision-pipelines">
+                  <div><strong>Face similarity</strong><ol class="vision-pipeline" aria-label="Face-similarity study flow"><li>Webcam</li><li>Preprocess</li><li>Embed</li><li>Compare</li><li>Rank</li></ol></div>
+                  <div><strong>Image to text</strong><ol class="vision-pipeline" aria-label="Image-to-text study flow"><li>Scan</li><li>Preprocess</li><li>OCR</li><li>Parse</li><li>Review</li></ol></div>
+                </div>
+              </div>
+              <dl class="vision-work">
+                <div><dt>Face similarity study</dt><dd>Webcam frames become embeddings and are ranked against a small image set using cosine similarity.</dd></div>
+                <div><dt>Image-to-text study</dt><dd>OpenCV preprocessing and Tesseract OCR extract contact details from scanned-card images.</dd></div>
+                <div><dt>What I focused on</dt><dd>Input cleanup, failed detections, model integration, validation, and readable output.</dd></div>
+              </dl>
+            </div>
+        {% endcase %}
+
+        {% if project.id == 'ai-delivery' %}
+          <details class="project-details project-details--delivery" data-delivery-details data-reveal>
+            <summary>Inside the delivery work</summary>
+            <div class="delivery-proof">
+              <header class="delivery-proof__header">
+                <span>Selected step</span>
+                <strong data-delivery-proof-title>Discovery</strong>
+                <p>This view follows the step selected above</p>
+              </header>
+              <div class="delivery-proof__panels">
+                <section class="delivery-proof__panel is-active" data-delivery-proof-panel="discovery">
+                  <dl>
+                    <div><dt>The question</dt><dd>What is happening now, where does the handoff break, and which constraints are real?</dd></div>
+                    <div><dt>What I kept visible</dt><dd>People, systems, source material, access limits, confirmed facts, assumptions, and open questions.</dd></div>
+                    <div><dt>What moved forward</dt><dd>A narrow problem statement, the right owners, and a clear next investigation or decision.</dd></div>
+                  </dl>
+                </section>
+                <section class="delivery-proof__panel" data-delivery-proof-panel="requirements" hidden>
+                  <dl>
+                    <div><dt>The question</dt><dd>What behavior must work, including edge cases, and what will count as proof?</dd></div>
+                    <div><dt>What I kept visible</dt><dd>User paths, dependencies, owners, non-negotiable constraints, and observable acceptance checks.</dd></div>
+                    <div><dt>What moved forward</dt><dd>Review-ready requirements and ordered build slices with unresolved decisions still called out.</dd></div>
+                  </dl>
+                </section>
+                <section class="delivery-proof__panel" data-delivery-proof-panel="implementation" hidden>
+                  <dl>
+                    <div><dt>The question</dt><dd>Does the latest build still solve the agreed problem, and what is blocking the next usable slice?</dd></div>
+                    <div><dt>What I kept visible</dt><dd>Verified status, repository and board evidence, dependencies, blockers, owners, and changed decisions.</dd></div>
+                    <div><dt>What moved forward</dt><dd>Blockers were routed early and technical handoffs stayed tied to the original requirement.</dd></div>
+                  </dl>
+                </section>
+                <section class="delivery-proof__panel" data-delivery-proof-panel="readiness" hidden>
+                  <dl>
+                    <div><dt>The question</dt><dd>Can a real user complete the full journey, recover from failure, and get support?</dd></div>
+                    <div><dt>What I kept visible</dt><dd>Accounts, permissions, onboarding, failure states, issue evidence, support ownership, and fallback paths.</dd></div>
+                    <div><dt>What moved forward</dt><dd>A direct go or no-go view that separated confirmed behavior from remaining risk.</dd></div>
+                  </dl>
+                </section>
+                <section class="delivery-proof__panel" data-delivery-proof-panel="rollout" hidden>
+                  <dl>
+                    <div><dt>The question</dt><dd>What is live, how should people use it, and who owns the next issue or decision?</dd></div>
+                    <div><dt>What I kept visible</dt><dd>Release notes, onboarding paths, support routes, feedback intake, open items, owners, and deadlines.</dd></div>
+                    <div><dt>What moved forward</dt><dd>A usable handoff and feedback loop that could route real findings back into implementation.</dd></div>
+                  </dl>
+                </section>
+              </div>
+            </div>
+          </details>
+        {% else %}
+          <details class="project-details" data-reveal>
+            <summary>More about the work</summary>
+            <div class="project-proof">
+              <dl>
+                <div><dt>The need</dt><dd>{{ project.context }}</dd></div>
+                <div><dt>What I owned</dt><dd>{{ project.role }}</dd></div>
+                <div><dt>How I built it</dt><dd>{{ project.system }}</dd></div>
+                <div><dt>What it produced</dt><dd>{{ project.outcome }}</dd></div>
+              </dl>
+              {% if project.highlights.size > 0 %}
+                <div class="project-proof__highlights">
+                  <p>What I handled</p>
+                  <ul>
+                    {% for highlight in project.highlights %}<li>{{ highlight }}</li>{% endfor %}
+                  </ul>
+                </div>
+              {% endif %}
+              {% if project.technologies.size > 0 %}
+                <ul class="technology-list" aria-label="Technologies">
+                  {% for technology in project.technologies %}<li>{{ technology }}</li>{% endfor %}
+                </ul>
+              {% endif %}
+            </div>
+          </details>
+        {% endif %}
+      </article>
+    {% endfor %}
+
+    <aside class="related-experiment" aria-label="Additional project" data-reveal>
+      {% for item in site.data.projects.archive %}
+        {% if item.id == 'fivem-scripting-experiments' %}
+          <article class="fivem-card">
+            <div class="fivem-card__media" data-media data-autoplay-visible>
+              <video muted loop playsinline preload="metadata" poster="{{ '/assets/media/archive/fivem-demo-poster.webp' | relative_url }}" aria-label="{{ item.media_label }}">
+                <source src="{{ '/assets/media/archive/fivem-demo.webm' | relative_url }}" type="video/webm">
+                <source src="{{ '/assets/media/archive/fivem-demo.mp4' | relative_url }}" type="video/mp4">
+              </video>
+              <button class="media-control" type="button" data-media-toggle aria-label="Play FiveM development recording">Play</button>
+              <p class="sr-only" aria-live="polite" data-media-status></p>
+            </div>
+            <div class="fivem-card__copy">
+              <p class="fivem-card__label">Additional project</p>
+              <h4>{{ item.title }}</h4>
+              <p>{{ item.summary }}</p>
+              <ul class="technology-list" aria-label="Technologies">
+                {% for technology in item.technologies %}<li>{{ technology }}</li>{% endfor %}
+              </ul>
+              <small>{{ item.media_label }}</small>
+            </div>
+          </article>
+        {% endif %}
+      {% endfor %}
+    </aside>
+  </div>
+</section>

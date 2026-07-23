@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en" data-theme="dark" data-motion="full">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="color-scheme" content="dark light">
+    <meta name="theme-color" content="#060b11">
+    <meta name="description" content="{{ site.description | escape }}">
+    <meta name="author" content="Joshua Valle">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{{ site.title | escape }}">
+    <meta property="og:description" content="{{ site.description | escape }}">
+    <meta property="og:url" content="{{ page.url | absolute_url }}">
+    <meta name="twitter:card" content="summary_large_image">
+    <title>{{ site.title }}</title>
+    <link rel="icon" type="image/png" href="{{ '/assets/media/favicon.png' | relative_url }}">
+    <script>
+      (() => {
+        const root = document.documentElement;
+        let theme = 'dark';
+        let storedMotion = null;
+        try {
+          theme = localStorage.getItem('jv-theme') || 'dark';
+          storedMotion = localStorage.getItem('jv-motion');
+        } catch (error) {
+          // Storage can be unavailable in private or restricted browsing modes.
+        }
+        const motion = storedMotion === 'reduced' || storedMotion === 'full'
+          ? storedMotion
+          : 'full';
+        root.dataset.theme = theme;
+        root.dataset.motion = motion;
+        root.dataset.motionPreference = motion;
+      })();
+    </script>
+    <link rel="stylesheet" href="{{ '/assets/css/systems-lab.css' | relative_url }}?v=20260716-3">
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <div class="page-noise" aria-hidden="true"></div>
+    {% include site-header.html %}
+
+    <main id="main-content">
+      {% include hero-system.html %}
+      {% include experience-timeline.html %}
+      {% include project-workspace.html %}
+      {% include capabilities.html %}
+      {% include credentials.html %}
+      {% include contact.html %}
+    </main>
+
+    {% include site-footer.html %}
+    <script type="module" src="{{ '/assets/js/app.js' | relative_url }}?v=20260715-9"></script>
+  </body>
+</html>

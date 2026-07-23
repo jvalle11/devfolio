@@ -1,0 +1,82 @@
+.js .is-reveal-pending {
+  opacity: 0;
+  transform: translateY(24px);
+}
+
+.js .is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity var(--slow) var(--ease) var(--reveal-delay, 0ms),
+    transform var(--slow) var(--ease) var(--reveal-delay, 0ms);
+}
+
+html[data-motion="full"] .signal-dot {
+  animation: signal-travel 4.8s var(--ease) infinite;
+}
+
+html[data-motion="full"] .signal-dot--two { animation-delay: -1.2s; }
+html[data-motion="full"] .signal-dot--three { animation-delay: -2.4s; }
+html[data-motion="full"] .signal-dot--four { animation-delay: -3.6s; }
+
+html[data-motion="full"] .system-map__core {
+  animation: core-pulse 2.8s ease-in-out infinite;
+}
+
+html[data-motion="full"] .timeline__marker,
+html[data-motion="full"] .credential__mark {
+  animation: marker-breathe 3.6s ease-in-out infinite;
+}
+
+.vehicle-stages li,
+.pipeline-overlay span {
+  transition: background var(--medium), color var(--medium), border-color var(--medium);
+}
+
+.pipeline-overlay span.is-active {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.vehicle-visual__model.is-dragging {
+  cursor: grabbing;
+}
+
+@keyframes signal-travel {
+  0%, 100% { opacity: 0.28; transform: scale(0.72); }
+  45%, 60% { opacity: 1; transform: scale(1.2); }
+}
+
+@keyframes core-pulse {
+  0%, 100% { box-shadow: 0 0 0 9px var(--accent-soft), 0 0 22px var(--accent-glow); }
+  50% { box-shadow: 0 0 0 15px transparent, 0 0 42px var(--accent-glow); }
+}
+
+@keyframes marker-breathe {
+  0%, 100% { box-shadow: 0 0 0 1px var(--accent), 0 0 8px transparent; }
+  50% { box-shadow: 0 0 0 1px var(--accent), 0 0 16px var(--accent-glow); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+html[data-motion="reduced"] *,
+html[data-motion="reduced"] *::before,
+html[data-motion="reduced"] *::after {
+  scroll-behavior: auto !important;
+  animation: none !important;
+  transition-duration: 0.01ms !important;
+}
+
+html[data-motion="reduced"] .is-reveal-pending {
+  opacity: 1;
+  transform: none;
+}

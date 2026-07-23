@@ -1,0 +1,30 @@
+<section class="capabilities section-band" id="capabilities" aria-labelledby="capabilities-title">
+  <div class="shell">
+    <header class="section-heading section-heading--plain" data-reveal>
+      <div>
+        <h2 id="capabilities-title">Skills and tools</h2>
+      </div>
+    </header>
+    <ul class="capability-toolbelt" aria-label="Core tool overview" data-reveal>
+      {% for group in site.data.capabilities.toolbelt %}<li><span>{{ group.label }}</span><strong>{{ group.tools }}</strong></li>{% endfor %}
+    </ul>
+    <div class="capability-browser" data-capabilities data-reveal>
+      <div class="capability-tabs" role="tablist" aria-label="Capability groups">
+        {% for group in site.data.capabilities.groups %}
+          <button id="capability-tab-{{ group.id }}" type="button" role="tab" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}" aria-controls="capability-panel-{{ group.id }}" tabindex="{% if forloop.first %}0{% else %}-1{% endif %}" data-capability-tab="{{ group.id }}">{{ group.title }}</button>
+        {% endfor %}
+      </div>
+      <div class="capability-panels">
+        {% for group in site.data.capabilities.groups %}
+          <section class="capability-group{% if forloop.first %} is-active{% endif %}" id="capability-panel-{{ group.id }}" role="tabpanel" aria-labelledby="capability-tab-{{ group.id }}" data-capability-panel="{{ group.id }}"{% unless forloop.first %} hidden{% endunless %}>
+            <div><h3>{{ group.title }}</h3><p>{{ group.description }}</p></div>
+            <p class="capability-group__used"><span>Used in</span>{{ group.used_in }}</p>
+            <ul>
+              {% for item in group.items %}<li><strong>{{ item.name }}</strong><span>{{ item.context }}</span></li>{% endfor %}
+            </ul>
+          </section>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>

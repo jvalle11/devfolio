@@ -1,10 +1,21 @@
 {% assign profile = site.data.profile %}
+{% assign headline = profile.headline | escape %}
+{% if profile.headline_accent %}
+  {% assign accent = profile.headline_accent | escape %}
+  {% capture accent_html %}<span class="hero__accent">{{ accent }}</span>{% endcapture %}
+  {% assign headline = headline | replace: accent, accent_html %}
+{% endif %}
 <section class="hero" id="home" aria-labelledby="hero-title" data-hero-root>
+  <div class="hero-aurora" aria-hidden="true">
+    <span class="hero-aurora__blob hero-aurora__blob--one"></span>
+    <span class="hero-aurora__blob hero-aurora__blob--two"></span>
+    <span class="hero-aurora__blob hero-aurora__blob--three"></span>
+  </div>
   <canvas class="hero-field" data-hero-field aria-hidden="true"></canvas>
   <div class="hero__inner shell">
     <div class="hero__copy" id="about" data-reveal>
       <p class="hero__name">{{ profile.name }}</p>
-      <h1 id="hero-title">{{ profile.headline }}</h1>
+      <h1 id="hero-title" data-kinetic>{{ headline }}</h1>
       <p class="hero__subhead">{{ profile.subhead }}</p>
       <div class="hero__actions">
         <a class="button button--primary" href="#projects">Explore the work</a>

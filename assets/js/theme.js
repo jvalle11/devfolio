@@ -155,11 +155,56 @@ export function initTheme() {
   syncControls();
 
   themeControls.forEach((control) => {
-    const onClick = () => {
-      theme = applyTheme(theme === "dark" ? "light" : "dark", {
-        persist: true,
-      });
-      syncControls();
+    const onClick = (event) => {
+      const commit = () => {
+        theme = applyTheme(theme === "dark" ? "light" : "dark", {
+          persist: true,
+        });
+        syncControls();
+      };
+
+      if (
+        typeof document.startViewTransition !== "function" ||
+        isReducedMotion() ||
+        motionQuery.matches
+      ) {
+        commit();
+        return;
+      }
+
+      // The new theme spreads out as a circle from wherever it was toggled.
+      const bounds = control.getBoundingClientRect();
+      const x = event.clientX || bounds.left + bounds.width / 2;
+      const y = event.clientY || bounds.top + bounds.height / 2;
+      const radius = Math.hypot(
+        Math.max(x, window.innerWidth - x),
+        Math.max(y, window.innerHeight - y),
+      );
+      // Backdrop blur has nothing to sample inside the transition snapshots,
+      // so the header is made opaque for the length of the switch.
+      root.classList.add("is-theme-switching");
+      const transition = document.startViewTransition(commit);
+      transition.finished
+        .catch(() => {})
+        .finally(() => root.classList.remove("is-theme-switching"));
+
+      transition.ready
+        .then(() => {
+          root.animate(
+            {
+              clipPath: [
+                `circle(0px at ${x}px ${y}px)`,
+                `circle(${radius}px at ${x}px ${y}px)`,
+              ],
+            },
+            {
+              duration: 680,
+              easing: "cubic-bezier(0.22, 1, 0.36, 1)",
+              pseudoElement: "::view-transition-new(root)",
+            },
+          );
+        })
+        .catch(() => {});
     };
 
     control.addEventListener("click", onClick);

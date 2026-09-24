@@ -1,5 +1,7 @@
 name: "Joshua Valle"
 headline: "I turn messy operational problems into usable systems"
+# Phrase inside the headline that gets the animated accent treatment.
+headline_accent: "usable systems"
 subhead: >-
   My work spans AI implementation, workflow automation, and full-stack
   development, from mapping the problem and defining requirements through

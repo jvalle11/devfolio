@@ -6,6 +6,7 @@ import { initVehicle } from "./vehicle.js";
 import { initHero } from "./hero.js";
 import { initCapabilities } from "./capabilities.js";
 import { initDelivery } from "./delivery.js?v=20260715-8";
+import { initEffects } from "./effects.js?v=20260924-1";
 
 document.documentElement.classList.add("js");
 
@@ -141,6 +142,7 @@ function boot() {
     initCapabilities(),
     initDelivery(),
     initPreviewForms(),
+    initEffects(),
   ];
 
   window.addEventListener(

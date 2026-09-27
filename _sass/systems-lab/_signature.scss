@@ -1,0 +1,658 @@
+/* Signature layer: atmosphere, kinetic type, and pointer-aware surfaces.
+   Loaded last. Motion-only rules are gated on html[data-motion="full"], and
+   pointer-only rules rely on effects.js, which checks for a hovering pointer. */
+
+@property --wr {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0px;
+}
+
+:root {
+  --accent-2: #54f2c4;
+  --spring: cubic-bezier(0.2, 0.9, 0.3, 1.25);
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.6 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+html[data-theme="light"] {
+  --accent-2: #00806a;
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.6 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ------------------------------------------------------------------ */
+/* Atmosphere                                                          */
+/* ------------------------------------------------------------------ */
+
+.page-noise {
+  position: fixed;
+  z-index: 9990;
+  inset: 0;
+  display: block;
+  opacity: 0.05;
+  background-image: var(--grain);
+  background-size: 220px 220px;
+  pointer-events: none;
+}
+
+html[data-theme="light"] .page-noise {
+  opacity: 0.035;
+}
+
+.scroll-meter {
+  position: fixed;
+  z-index: 130;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 2px;
+  pointer-events: none;
+}
+
+.scroll-meter span {
+  display: block;
+  height: 100%;
+  transform: scaleX(0);
+  transform-origin: left center;
+  background: linear-gradient(90deg, color-mix(in srgb, var(--accent-2), transparent 30%), var(--accent));
+  box-shadow: 0 0 14px var(--accent-glow);
+}
+
+/* ------------------------------------------------------------------ */
+/* Header                                                              */
+/* ------------------------------------------------------------------ */
+
+html.fx .site-header {
+  transition:
+    transform 520ms var(--ease),
+    background-color 300ms ease,
+    box-shadow 300ms ease;
+}
+
+html.fx .site-header.is-scrolled {
+  background: color-mix(in srgb, var(--bg), transparent 22%);
+  box-shadow:
+    0 1px 0 var(--line),
+    0 22px 48px -30px rgba(0, 0, 0, 0.7);
+}
+
+html.fx .site-header.is-tucked {
+  transform: translateY(-100%);
+}
+
+.site-nav__indicator {
+  display: none;
+}
+
+@media (min-width: 64.01rem) {
+  .site-nav.has-indicator {
+    position: relative;
+  }
+
+  .site-nav.has-indicator > a::after {
+    display: none;
+  }
+
+  .site-nav.has-indicator > a {
+    transition: color 220ms ease;
+  }
+
+  .site-nav__indicator {
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    display: block;
+    width: var(--indicator-w, 0px);
+    height: 2px;
+    transform: translateX(var(--indicator-x, 0px));
+    border-radius: 2px;
+    background: var(--accent);
+    box-shadow:
+      0 0 12px var(--accent-glow),
+      0 0 3px var(--accent);
+    opacity: 0;
+    pointer-events: none;
+    transition:
+      transform 520ms var(--ease),
+      width 520ms var(--ease),
+      opacity 240ms ease;
+  }
+
+  .site-nav__indicator.is-placed {
+    opacity: 1;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Hero                                                                */
+/* ------------------------------------------------------------------ */
+
+.hero-aurora {
+  position: absolute;
+  z-index: 0;
+  inset: -12% -8%;
+  pointer-events: none;
+}
+
+.hero-aurora__blob {
+  position: absolute;
+  display: block;
+  border-radius: 50%;
+}
+
+.hero-aurora__blob--one {
+  top: 6%;
+  left: 50%;
+  width: min(62vw, 980px);
+  aspect-ratio: 1;
+  background: radial-gradient(circle, color-mix(in srgb, var(--accent), transparent 84%) 0%, transparent 62%);
+}
+
+.hero-aurora__blob--two {
+  top: 38%;
+  left: 64%;
+  width: min(48vw, 760px);
+  aspect-ratio: 1;
+  background: radial-gradient(circle, color-mix(in srgb, var(--accent-2), transparent 88%) 0%, transparent 60%);
+}
+
+.hero-aurora__blob--three {
+  top: 58%;
+  left: 36%;
+  width: min(40vw, 640px);
+  aspect-ratio: 1;
+  background: radial-gradient(circle, color-mix(in srgb, var(--accent), transparent 92%) 0%, transparent 64%);
+}
+
+html[data-motion="full"] .hero-aurora {
+  translate:
+    calc(var(--px, 0) * -34px)
+    calc(var(--py, 0) * -22px + var(--hero-exit, 0) * 180px);
+  transition: translate 1400ms var(--ease);
+}
+
+html[data-motion="full"] .hero-aurora__blob--one {
+  animation: aurora-drift-one 22s ease-in-out infinite alternate;
+}
+
+html[data-motion="full"] .hero-aurora__blob--two {
+  animation: aurora-drift-two 27s ease-in-out infinite alternate;
+}
+
+html[data-motion="full"] .hero-aurora__blob--three {
+  animation: aurora-drift-three 31s ease-in-out infinite alternate;
+}
+
+@keyframes aurora-drift-one {
+  from { transform: translate3d(0, 0, 0) scale(1); }
+  to { transform: translate3d(-9%, 7%, 0) scale(1.14); }
+}
+
+@keyframes aurora-drift-two {
+  from { transform: translate3d(0, 0, 0) scale(1.08); }
+  to { transform: translate3d(-14%, -10%, 0) scale(0.92); }
+}
+
+@keyframes aurora-drift-three {
+  from { transform: translate3d(0, 0, 0) scale(0.94); }
+  to { transform: translate3d(18%, -6%, 0) scale(1.1); }
+}
+
+html[data-motion="full"] .hero-field {
+  translate: 0 calc(var(--hero-exit, 0) * 120px);
+}
+
+html[data-motion="full"] .hero__inner {
+  translate: 0 calc(var(--hero-exit, 0) * -80px);
+  opacity: calc(1 - var(--hero-exit, 0) * 1.05);
+}
+
+/* Accent phrase in the headline: a slow flow of the two accent colors. */
+.hero__accent,
+.hero__accent .kinetic-word__inner {
+  background-image: linear-gradient(100deg, var(--accent) 0%, var(--accent-2) 45%, var(--accent) 90%);
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+[data-kinetic].is-kinetic .hero__accent,
+[data-kinetic].is-kinetic-done .hero__accent {
+  background: none;
+  color: inherit;
+}
+
+html[data-motion="full"] .hero__accent,
+html[data-motion="full"] .hero__accent .kinetic-word__inner {
+  animation: accent-flow 7s linear infinite;
+}
+
+@keyframes accent-flow {
+  to { background-position: -220% 0; }
+}
+
+.kinetic-word {
+  display: inline-block;
+}
+
+.kinetic-word__inner {
+  display: inline-block;
+}
+
+[data-kinetic].is-kinetic .kinetic-word__inner {
+  opacity: 0;
+  transform: translate3d(0, 0.5em, 0) rotate(4deg);
+  transform-origin: 0 100%;
+  filter: blur(12px);
+  transition:
+    opacity 900ms var(--ease),
+    transform 1100ms var(--ease),
+    filter 900ms var(--ease);
+  transition-delay: calc(var(--i, 0) * 65ms + 140ms);
+}
+
+[data-kinetic].is-kinetic.is-kinetic-in .kinetic-word__inner {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+
+/* ------------------------------------------------------------------ */
+/* Signal marquee                                                      */
+/* ------------------------------------------------------------------ */
+
+.signal-marquee {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  padding-block: clamp(22px, 3vw, 38px);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: var(--bg);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent);
+}
+
+.signal-marquee__track {
+  display: flex;
+  width: max-content;
+}
+
+html[data-motion="full"] .signal-marquee__track {
+  animation: marquee-run 60s linear infinite;
+}
+
+.signal-marquee.is-offscreen .signal-marquee__track {
+  animation-play-state: paused;
+}
+
+.signal-marquee__group {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  list-style: none;
+  transform: skewX(var(--marquee-skew, 0deg));
+  transition: transform 400ms var(--ease);
+}
+
+.signal-marquee__item {
+  display: flex;
+  align-items: center;
+  color: var(--text-strong);
+  font-family: var(--display);
+  font-size: clamp(1.7rem, 3.4vw, 3.1rem);
+  font-weight: 600;
+  letter-spacing: -0.045em;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+.signal-marquee__item--dim {
+  color: color-mix(in srgb, var(--text-strong), transparent 72%);
+}
+
+.signal-marquee__item::after {
+  display: block;
+  width: 0.2em;
+  height: 0.2em;
+  margin-inline: clamp(20px, 2.6vw, 42px);
+  transform: rotate(45deg);
+  background: var(--accent);
+  box-shadow: 0 0 14px var(--accent-glow);
+  content: "";
+}
+
+@keyframes marquee-run {
+  to { transform: translate3d(-50%, 0, 0); }
+}
+
+/* ------------------------------------------------------------------ */
+/* Scroll-driven type                                                  */
+/* ------------------------------------------------------------------ */
+
+html[data-motion="full"] .fx-fill .fill-word {
+  opacity: clamp(0.14, calc(var(--p, 0) * (var(--n, 1) + 3) - var(--i, 0)), 1);
+  transition: opacity 180ms linear;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-motion] .fx-fill .fill-word {
+    opacity: 1;
+  }
+}
+
+/* Reveals gain a focus-pull on top of the existing rise. */
+html.js.fx[data-motion="full"] .is-reveal-pending {
+  filter: blur(8px);
+}
+
+html.js.fx[data-motion="full"] .is-visible {
+  filter: none;
+  transition:
+    opacity var(--slow) var(--ease) var(--reveal-delay, 0ms),
+    transform var(--slow) var(--ease) var(--reveal-delay, 0ms),
+    filter var(--slow) var(--ease) var(--reveal-delay, 0ms);
+}
+
+/* ------------------------------------------------------------------ */
+/* Pointer-aware surfaces                                              */
+/* ------------------------------------------------------------------ */
+
+.has-spotlight {
+  isolation: isolate;
+}
+
+.has-spotlight--anchor {
+  position: relative;
+}
+
+.fx-spotlight,
+.fx-spotlight-edge {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 420ms ease;
+}
+
+.fx-spotlight {
+  z-index: -1;
+  background: radial-gradient(
+    560px circle at var(--mx, 50%) var(--my, 50%),
+    color-mix(in srgb, var(--accent), transparent 90%),
+    transparent 62%
+  );
+}
+
+.fx-spotlight-edge {
+  z-index: 3;
+  padding: 1px;
+  background: radial-gradient(
+    380px circle at var(--mx, 50%) var(--my, 50%),
+    color-mix(in srgb, var(--accent), transparent 30%),
+    transparent 70%
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#000 0 0) content-box exclude,
+    linear-gradient(#000 0 0);
+}
+
+.has-spotlight.is-lit > .fx-spotlight,
+.has-spotlight.is-lit > .fx-spotlight-edge {
+  opacity: 1;
+}
+
+/* Buttons: magnetic pull, a light sweep, and a glow on the primary action. */
+html.fx .button.is-magnetic {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  transform: translate3d(var(--mag-x, 0px), var(--mag-y, 0px), 0);
+  transition:
+    background 160ms ease,
+    color 160ms ease,
+    border-color 160ms ease,
+    box-shadow 360ms ease,
+    transform 650ms var(--spring);
+}
+
+html.fx .button.is-magnetic:hover {
+  transform: translate3d(var(--mag-x, 0px), var(--mag-y, 0px), 0);
+  transition-duration: 160ms, 160ms, 160ms, 360ms, 220ms;
+}
+
+html.fx .button--primary.is-magnetic:hover {
+  box-shadow: 0 14px 44px -12px var(--accent-glow);
+}
+
+html.fx .button.is-magnetic::after {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  transform: translateX(-110%);
+  background: linear-gradient(105deg, transparent 25%, rgba(255, 255, 255, 0.5) 50%, transparent 75%);
+  content: "";
+  transition: transform 900ms var(--ease);
+}
+
+html.fx .button--secondary.is-magnetic::after {
+  background: linear-gradient(105deg, transparent 25%, color-mix(in srgb, var(--accent), transparent 80%) 50%, transparent 75%);
+}
+
+html.fx .button.is-magnetic:hover::after {
+  transform: translateX(110%);
+}
+
+/* Media: an aperture reveal, then a gentle 3D tilt with a moving highlight. */
+html[data-motion="full"] .fx-aperture {
+  clip-path: inset(10% 8% 10% 8% round 32px);
+  transition: clip-path 1300ms var(--ease);
+}
+
+html[data-motion="full"] .fx-aperture.is-open {
+  clip-path: inset(-80px round 0px);
+}
+
+html[data-motion="full"] .media-frame.fx-aperture > video,
+html[data-motion="full"] .fivem-card__media.fx-aperture > video {
+  scale: 1.14;
+  transition: scale 1700ms var(--ease);
+}
+
+html[data-motion="full"] .fx-aperture.is-open > video {
+  scale: 1;
+}
+
+html[data-motion="full"] .fx-tilt {
+  transform: perspective(1200px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
+  transition:
+    clip-path 1300ms var(--ease),
+    transform 700ms var(--ease);
+}
+
+html[data-motion="full"] .fx-tilt.is-tilting {
+  transition:
+    clip-path 1300ms var(--ease),
+    transform 140ms linear;
+}
+
+.fx-glare {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    circle at var(--glare-x, 50%) var(--glare-y, 50%),
+    rgba(255, 255, 255, 0.22),
+    transparent 55%
+  );
+  opacity: 0;
+  mix-blend-mode: soft-light;
+  pointer-events: none;
+  transition: opacity 400ms ease;
+}
+
+.fx-tilt.is-tilting .fx-glare {
+  opacity: 1;
+}
+
+/* Form fields: a soft halo on focus. */
+html.fx .field input,
+html.fx .field textarea {
+  transition:
+    border-color 220ms ease,
+    box-shadow 320ms ease,
+    background-color 220ms ease;
+}
+
+html.fx .field input:focus,
+html.fx .field textarea:focus {
+  box-shadow:
+    0 0 0 4px var(--accent-soft),
+    0 18px 50px -24px var(--accent-glow);
+}
+
+/* Trailing cursor ring, shown only for a mouse with full motion. */
+.fx-cursor {
+  position: fixed;
+  z-index: 10000;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 300ms ease;
+}
+
+.fx-cursor::before {
+  position: absolute;
+  top: -17px;
+  left: -17px;
+  width: 34px;
+  height: 34px;
+  border: 1px solid color-mix(in srgb, var(--accent), transparent 30%);
+  border-radius: 50%;
+  content: "";
+  transition:
+    scale 380ms var(--ease),
+    background-color 300ms ease,
+    border-color 300ms ease;
+}
+
+.fx-cursor.is-visible {
+  opacity: 1;
+}
+
+.fx-cursor.is-active::before {
+  border-color: transparent;
+  background: color-mix(in srgb, var(--accent), transparent 86%);
+  scale: 1.7;
+}
+
+.fx-cursor.is-pressed::before {
+  scale: 0.8;
+}
+
+html[data-motion="reduced"] .fx-cursor {
+  display: none;
+}
+
+/* ------------------------------------------------------------------ */
+/* Footer wordmark                                                     */
+/* ------------------------------------------------------------------ */
+
+.footer-wordmark {
+  position: relative;
+  display: grid;
+  padding-top: clamp(48px, 7vw, 110px);
+  overflow: hidden;
+  container-type: inline-size;
+  font-family: var(--display);
+  font-size: 17vw;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 0.86;
+  white-space: nowrap;
+  user-select: none;
+  -webkit-mask-image: linear-gradient(180deg, #000 58%, transparent 100%);
+  mask-image: linear-gradient(180deg, #000 58%, transparent 100%);
+}
+
+.footer-wordmark > span {
+  grid-area: 1 / 1;
+  font-size: 17.6cqi;
+}
+
+/* A dim fill rather than an outline: text-stroke exposes the overlapping
+   contours inside Manrope's variable glyphs. */
+.footer-wordmark__base {
+  background: linear-gradient(180deg, color-mix(in srgb, var(--text-strong), transparent 86%), color-mix(in srgb, var(--text-strong), transparent 97%));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.footer-wordmark__fill {
+  background: linear-gradient(100deg, var(--accent), var(--accent-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-mask-image: radial-gradient(circle var(--wr) at var(--wx, 50%) var(--wy, 50%), #000 25%, transparent 100%);
+  mask-image: radial-gradient(circle var(--wr) at var(--wx, 50%) var(--wy, 50%), #000 25%, transparent 100%);
+  transition: --wr 700ms var(--ease);
+}
+
+.footer-wordmark.is-lit {
+  --wr: clamp(160px, 22vw, 320px);
+}
+
+@media (hover: none) {
+  .footer-wordmark__fill {
+    opacity: 0.85;
+    -webkit-mask-image: linear-gradient(100deg, #000 0%, transparent 55%);
+    mask-image: linear-gradient(100deg, #000 0%, transparent 55%);
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Theme switch: circular reveal via the View Transitions API          */
+/* ------------------------------------------------------------------ */
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+html.is-theme-switching .site-header {
+  background: var(--bg);
+  backdrop-filter: none;
+}
+
+/* ------------------------------------------------------------------ */
+/* Small screens                                                       */
+/* ------------------------------------------------------------------ */
+
+@media (max-width: 43rem) {
+  .signal-marquee__item {
+    font-size: 1.5rem;
+  }
+
+  .hero-aurora__blob--one {
+    top: 22%;
+    left: 10%;
+    width: 120vw;
+  }
+
+  .hero-aurora__blob--two {
+    top: 52%;
+    left: 30%;
+    width: 90vw;
+  }
+}

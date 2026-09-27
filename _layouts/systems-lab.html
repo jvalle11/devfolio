@@ -33,15 +33,17 @@
         root.dataset.motionPreference = motion;
       })();
     </script>
-    <link rel="stylesheet" href="{{ '/assets/css/systems-lab.css' | relative_url }}?v=20260716-3">
+    <link rel="stylesheet" href="{{ '/assets/css/systems-lab.css' | relative_url }}?v=20260924-1">
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to content</a>
     <div class="page-noise" aria-hidden="true"></div>
+    <div class="scroll-meter" aria-hidden="true"><span data-scroll-progress></span></div>
     {% include site-header.html %}
 
     <main id="main-content">
       {% include hero-system.html %}
+      {% include signal-marquee.html %}
       {% include experience-timeline.html %}
       {% include project-workspace.html %}
       {% include capabilities.html %}
@@ -50,6 +52,6 @@
     </main>
 
     {% include site-footer.html %}
-    <script type="module" src="{{ '/assets/js/app.js' | relative_url }}?v=20260715-9"></script>
+    <script type="module" src="{{ '/assets/js/app.js' | relative_url }}?v=20260924-1"></script>
   </body>
 </html>

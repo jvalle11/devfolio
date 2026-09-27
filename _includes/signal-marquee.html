@@ -1,0 +1,22 @@
+{% comment %}
+  Decorative ticker between the hero and the experience section. It repeats
+  focus areas and tools that already appear elsewhere on the page, so the whole
+  band is hidden from assistive technology.
+{% endcomment %}
+{% assign signal_items = site.data.profile.focus %}
+{% for group in site.data.capabilities.toolbelt %}
+  {% assign group_tools = group.tools | split: " · " %}
+  {% assign signal_items = signal_items | concat: group_tools %}
+{% endfor %}
+<div class="signal-marquee" aria-hidden="true" data-marquee>
+  <div class="signal-marquee__track" data-marquee-track>
+    {% for pass in (1..2) %}
+      <ul class="signal-marquee__group">
+        {% for item in signal_items %}
+          {% assign dim = forloop.index | modulo: 2 %}
+          <li class="signal-marquee__item{% if dim == 0 %} signal-marquee__item--dim{% endif %}">{{ item }}</li>
+        {% endfor %}
+      </ul>
+    {% endfor %}
+  </div>
+</div>

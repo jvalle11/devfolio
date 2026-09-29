@@ -36,7 +36,7 @@ function initSmoothScroll() {
   let lenis = null;
   let disposed = false;
   let bodyObserver = null;
-  const lenisUrl = new URL("./vendor/lenis.min.js", import.meta.url).href;
+  const lenisUrl = new URL("./lib/lenis.min.js", import.meta.url).href;
 
   const start = async () => {
     if (lenis || !motionAllowed()) return;

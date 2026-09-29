@@ -7,7 +7,7 @@ import { initHero } from "./hero.js";
 import { initCapabilities } from "./capabilities.js";
 import { initDelivery } from "./delivery.js?v=20260715-8";
 import { initEffects } from "./effects.js?v=20260924-1";
-import { initFlow } from "./flow.js?v=20260929-1";
+import { initFlow } from "./flow.js?v=20260929-2";
 
 document.documentElement.classList.add("js");
 

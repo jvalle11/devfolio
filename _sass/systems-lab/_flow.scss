@@ -1,0 +1,274 @@
+/* Flow layer: scroll choreography and a quieter, more minimal chrome.
+   Pairs with assets/js/flow.js. Loaded after the signature layer. */
+
+/* ------------------------------------------------------------------ */
+/* Smooth scrolling (Lenis)                                            */
+/* ------------------------------------------------------------------ */
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+html.lenis {
+  scroll-behavior: auto;
+}
+
+.lenis:not(.lenis-autoToggle).lenis-stopped {
+  overflow: clip;
+}
+
+.lenis [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+/* ------------------------------------------------------------------ */
+/* Opening curtain (first visit per session, full motion only)         */
+/* ------------------------------------------------------------------ */
+
+.intro-curtain {
+  display: none;
+}
+
+html.has-intro .intro-curtain {
+  position: fixed;
+  z-index: 10001;
+  inset: 0;
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: 18px;
+  background: var(--bg);
+  clip-path: inset(0 0 0 0);
+  pointer-events: none;
+  animation: curtain-lift 950ms cubic-bezier(0.76, 0, 0.24, 1) 950ms forwards;
+}
+
+.intro-curtain__mark {
+  color: var(--text-strong);
+  font-family: var(--display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  animation: curtain-mark 800ms var(--ease) both;
+}
+
+.intro-curtain__bar {
+  position: relative;
+  width: 112px;
+  height: 1px;
+  overflow: hidden;
+  background: var(--line);
+}
+
+.intro-curtain__bar::after {
+  position: absolute;
+  inset: 0;
+  transform-origin: left center;
+  background: var(--accent);
+  box-shadow: 0 0 12px var(--accent-glow);
+  content: "";
+  animation: curtain-bar 850ms var(--ease) 120ms both;
+}
+
+@keyframes curtain-mark {
+  from { opacity: 0; transform: translateY(10px); filter: blur(6px); }
+}
+
+@keyframes curtain-bar {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+@keyframes curtain-lift {
+  to { clip-path: inset(0 0 100% 0); visibility: hidden; }
+}
+
+/* The headline waits for the curtain before it starts to rise. */
+html.has-intro [data-kinetic].is-kinetic .kinetic-word__inner {
+  transition-delay: calc(var(--i, 0) * 65ms + 1350ms);
+}
+
+/* ------------------------------------------------------------------ */
+/* Entrances                                                           */
+/* ------------------------------------------------------------------ */
+
+html[data-motion="full"] .fx-pending {
+  opacity: 0;
+}
+
+.rise-word {
+  display: inline-block;
+}
+
+/* Sections rise in as rounded panels and widen to full bleed. */
+html[data-motion="full"] .fx-rise.is-rising {
+  --rise-left: calc(1 - var(--rise, 1));
+  clip-path: inset(
+    0 calc(var(--rise-left) * 3vw) 0 calc(var(--rise-left) * 3vw)
+    round calc(var(--rise-left) * 48px) calc(var(--rise-left) * 48px) 0 0
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/* Disclosure: a plus that turns into a close mark, and eased height   */
+/* ------------------------------------------------------------------ */
+
+.project-details > summary {
+  display: flex;
+  width: fit-content;
+  align-items: center;
+  gap: 14px;
+  cursor: pointer;
+  list-style: none;
+  transition: color 220ms ease;
+}
+
+.project-details > summary::-webkit-details-marker {
+  display: none;
+}
+
+.project-details > summary::before {
+  flex: 0 0 auto;
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  background:
+    linear-gradient(currentColor, currentColor) center / 11px 1.5px no-repeat,
+    linear-gradient(currentColor, currentColor) center / 1.5px 11px no-repeat;
+  content: "";
+  transition:
+    rotate 520ms var(--ease),
+    border-color 220ms ease,
+    background-color 220ms ease;
+}
+
+.project-details > summary:hover {
+  color: var(--text-strong);
+}
+
+.project-details > summary:hover::before {
+  border-color: var(--accent);
+  background-color: var(--accent-soft);
+}
+
+.project-details[open] > summary::before {
+  rotate: 45deg;
+}
+
+.project-details {
+  interpolate-size: allow-keywords;
+}
+
+.project-details::details-content {
+  block-size: 0;
+  overflow-y: clip;
+  transition:
+    block-size 650ms var(--ease),
+    content-visibility 650ms allow-discrete;
+}
+
+.project-details[open]::details-content {
+  block-size: auto;
+}
+
+/* ------------------------------------------------------------------ */
+/* Header: icon-only display controls                                  */
+/* ------------------------------------------------------------------ */
+
+.header-controls .utility-button--icon {
+  position: relative;
+  display: inline-grid;
+  width: 38px;
+  height: 38px;
+  min-height: 38px;
+  padding: 0;
+  place-items: center;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  color: var(--muted);
+  cursor: pointer;
+  transition:
+    color 200ms ease,
+    border-color 200ms ease,
+    background-color 200ms ease;
+}
+
+.header-controls .utility-button--icon:hover {
+  border-color: var(--line-strong);
+  background: color-mix(in srgb, var(--surface), transparent 30%);
+  color: var(--text-strong);
+}
+
+.header-controls .utility-button--icon .utility-button__label {
+  position: absolute;
+  display: inline;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+
+.utility-icon {
+  grid-area: 1 / 1;
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.6;
+  transition:
+    opacity 320ms ease,
+    rotate 560ms var(--ease),
+    scale 420ms var(--ease);
+}
+
+html[data-theme="dark"] .utility-icon--moon,
+html[data-theme="light"] .utility-icon--sun,
+html[data-motion="full"] .utility-icon--motion-reduced,
+html[data-motion="reduced"] .utility-icon--motion-full {
+  opacity: 0;
+  rotate: -90deg;
+  scale: 0.4;
+}
+
+@media (max-width: 43rem) {
+  .header-controls .utility-button--motion {
+    display: none;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Quieter details                                                     */
+/* ------------------------------------------------------------------ */
+
+.hero-projects__heading span:last-child {
+  display: none;
+}
+
+.hero-field-hint {
+  opacity: 0.7;
+}
+
+@media (hover: none) {
+  .hero-field-hint {
+    display: none;
+  }
+}
+
+.signal-marquee {
+  padding-block: clamp(16px, 2.2vw, 28px);
+}
+
+.signal-marquee__item {
+  font-size: clamp(1.3rem, 2.5vw, 2.3rem);
+  font-weight: 500;
+}

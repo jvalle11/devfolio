@@ -31,11 +31,26 @@
         root.dataset.theme = theme;
         root.dataset.motion = motion;
         root.dataset.motionPreference = motion;
+
+        // A short opening curtain, once per browser session, with full motion only.
+        try {
+          const systemReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          if (motion === 'full' && !systemReduced && !sessionStorage.getItem('jv-intro')) {
+            sessionStorage.setItem('jv-intro', '1');
+            root.classList.add('has-intro');
+          }
+        } catch (error) {
+          // Without session storage the curtain is simply skipped.
+        }
       })();
     </script>
-    <link rel="stylesheet" href="{{ '/assets/css/systems-lab.css' | relative_url }}?v=20260924-1">
+    <link rel="stylesheet" href="{{ '/assets/css/systems-lab.css' | relative_url }}?v=20260929-1">
   </head>
   <body>
+    <div class="intro-curtain" aria-hidden="true">
+      <span class="intro-curtain__mark">JV</span>
+      <span class="intro-curtain__bar"></span>
+    </div>
     <a class="skip-link" href="#main-content">Skip to content</a>
     <div class="page-noise" aria-hidden="true"></div>
     <div class="scroll-meter" aria-hidden="true"><span data-scroll-progress></span></div>
@@ -52,6 +67,6 @@
     </main>
 
     {% include site-footer.html %}
-    <script type="module" src="{{ '/assets/js/app.js' | relative_url }}?v=20260924-1"></script>
+    <script type="module" src="{{ '/assets/js/app.js' | relative_url }}?v=20260929-1"></script>
   </body>
 </html>

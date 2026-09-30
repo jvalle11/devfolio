@@ -622,6 +622,25 @@ function initNavIndicator() {
   };
 }
 
+/* Navigation labels roll up to a fresh copy on hover. */
+function initNavRoll() {
+  const links = Array.from(document.querySelectorAll("[data-site-nav] > a"));
+  links.forEach((link) => {
+    if (link.querySelector(".nav-roll__track")) return;
+    const text = link.textContent.trim();
+    const track = document.createElement("span");
+    track.className = "nav-roll__track";
+    const face = document.createElement("span");
+    face.className = "nav-roll__face";
+    face.textContent = text;
+    const echo = face.cloneNode(true);
+    echo.setAttribute("aria-hidden", "true");
+    track.append(face, echo);
+    link.replaceChildren(track);
+  });
+  return () => {};
+}
+
 /* Hero depth: the aurora follows the pointer and the content lifts away on scroll. */
 function initHeroDepth() {
   const hero = document.querySelector("[data-hero-root]");
@@ -683,6 +702,7 @@ export function initEffects() {
     initWordmark(),
     initCursorRing(),
     initSmartHeader(),
+    initNavRoll(),
     initNavIndicator(),
     initHeroDepth(),
   ];

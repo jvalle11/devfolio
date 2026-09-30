@@ -238,7 +238,7 @@ function initStaggers() {
     [".vision-pipeline", ":scope > li", 70],
     [".capability-toolbelt", ":scope > li", 80],
     [".credential-column", ":scope > .credential", 80],
-    [".contact-links", ":scope > a", 70],
+    [".contact-links", ":scope > *", 70],
     [".technology-list", ":scope > li", 45],
   ];
 

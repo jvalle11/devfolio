@@ -11,7 +11,16 @@
     <meta property="og:title" content="{{ site.title | escape }}">
     <meta property="og:description" content="{{ site.description | escape }}">
     <meta property="og:url" content="{{ page.url | absolute_url }}">
+    <meta property="og:site_name" content="Joshua Valle">
+    <meta property="og:image" content="{{ '/assets/media/og-card.jpg' | absolute_url }}">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Joshua Valle: I turn messy operational problems into usable systems.">
     <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ site.title | escape }}">
+    <meta name="twitter:description" content="{{ site.description | escape }}">
+    <meta name="twitter:image" content="{{ '/assets/media/og-card.jpg' | absolute_url }}">
+    <link rel="canonical" href="{{ page.url | absolute_url }}">
     <title>{{ site.title }}</title>
     <link rel="icon" type="image/png" href="{{ '/assets/media/favicon.png' | relative_url }}">
     <script>
@@ -44,7 +53,7 @@
         }
       })();
     </script>
-    <link rel="stylesheet" href="{{ '/assets/css/systems-lab.css' | relative_url }}?v=20260929-1">
+    <link rel="stylesheet" href="{{ '/assets/css/systems-lab.css' | relative_url }}?v=20260930-1">
   </head>
   <body>
     <div class="intro-curtain" aria-hidden="true">
@@ -67,6 +76,6 @@
     </main>
 
     {% include site-footer.html %}
-    <script type="module" src="{{ '/assets/js/app.js' | relative_url }}?v=20260929-2"></script>
+    <script type="module" src="{{ '/assets/js/app.js' | relative_url }}?v=20260930-1"></script>
   </body>
 </html>

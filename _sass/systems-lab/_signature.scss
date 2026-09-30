@@ -308,7 +308,7 @@ html[data-motion="full"] .signal-marquee__track {
 }
 
 .signal-marquee__item--dim {
-  color: color-mix(in srgb, var(--text-strong), transparent 72%);
+  color: color-mix(in srgb, var(--text-strong), transparent 45%);
 }
 
 .signal-marquee__item::after {

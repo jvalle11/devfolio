@@ -1,0 +1,43 @@
+---
+layout: null
+permalink: /404.html
+---
+<!doctype html>
+<html lang="en" data-theme="dark" data-motion="full">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="color-scheme" content="dark light">
+    <meta name="robots" content="noindex">
+    <title>Page not found | Joshua Valle</title>
+    <link rel="icon" type="image/png" href="{{ '/assets/media/favicon.png' | relative_url }}">
+    <script>
+      (() => {
+        const root = document.documentElement;
+        try {
+          root.dataset.theme = localStorage.getItem('jv-theme') === 'light' ? 'light' : 'dark';
+          root.dataset.motion = localStorage.getItem('jv-motion') === 'reduced' ? 'reduced' : 'full';
+        } catch (error) {
+          // Defaults above apply when storage is unavailable.
+        }
+      })();
+    </script>
+    <link rel="stylesheet" href="{{ '/assets/css/systems-lab.css' | relative_url }}?v=20260930-1">
+  </head>
+  <body>
+    <div class="page-noise" aria-hidden="true"></div>
+    <main class="lost">
+      <div class="hero-aurora" aria-hidden="true">
+        <span class="hero-aurora__blob hero-aurora__blob--one"></span>
+        <span class="hero-aurora__blob hero-aurora__blob--two"></span>
+        <span class="hero-aurora__blob hero-aurora__blob--three"></span>
+      </div>
+      <div>
+        <p class="lost__code" aria-hidden="true">404</p>
+        <h1>This page drifted off the map.</h1>
+        <p>The link may be old or mistyped. Everything else is one step back.</p>
+        <a class="button button--primary" href="{{ '/' | relative_url }}">Back to the portfolio</a>
+      </div>
+    </main>
+  </body>
+</html>

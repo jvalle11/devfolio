@@ -6,7 +6,13 @@
       <h2 id="contact-title">Get in touch.</h2>
       <p>Email me about a role or project.</p>
       <div class="contact-links">
-        <a href="mailto:{{ profile.email }}"><span>Email</span>{{ profile.email }}</a>
+        <div class="contact-links__row">
+          <a href="mailto:{{ profile.email }}"><span>Email</span>{{ profile.email }}</a>
+          <button class="copy-email" type="button" data-copy-email hidden>
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="8.5" y="8.5" width="11" height="11" rx="2.5"/><path d="M15.5 8.5V6.5a2 2 0 0 0-2-2h-7a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h2"/></svg>
+            <span>Copy</span><span class="sr-only"> email address</span>
+          </button>
+        </div>
         <a href="{{ profile.github_url }}" target="_blank" rel="noreferrer"><span>GitHub</span>jvalle11</a>
         <a href="{{ profile.linkedin_url }}" target="_blank" rel="noreferrer"><span>LinkedIn</span>josh-valle-l337</a>
       </div>
